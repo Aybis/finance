@@ -1,0 +1,311 @@
+:root {
+  --kaza-canvas: #F3F4F6;
+  --kaza-shell: #F5F5F7;
+  --kaza-surface: #FFFFFF;
+  --kaza-surface-soft: #F9F9FB;
+  --kaza-surface-muted: #F2F2F5;
+  --kaza-ink: #232325;
+  --kaza-ink-strong: #18181B;
+  --kaza-border: #EAEAEF;
+  --kaza-text-primary: #18181B;
+  --kaza-text-secondary: #71717A;
+  --kaza-text-muted: #A1A1AA;
+  --kaza-positive: #16A34A;
+  --kaza-negative: #EF4444;
+  --kaza-ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* shadcn/ui semantic variables */
+  --background: #F3F4F6;
+  --foreground: #18181B;
+  --card: #FFFFFF;
+  --card-foreground: #18181B;
+  --popover: #FFFFFF;
+  --popover-foreground: #18181B;
+  --primary: #232325;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F4F6;
+  --secondary-foreground: #18181B;
+  --muted: #F4F4F6;
+  --muted-foreground: #71717A;
+  --accent: #ECECEF;
+  --accent-foreground: #18181B;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #EAEAEF;
+  --input: #E4E4E7;
+  --ring: #232325;
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html,
+  body {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--kaza-canvas);
+    color: var(--kaza-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle diagonal hatching used in Card Usage bars */
+.bg-kaza-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(24, 24, 27, 0.08) 0px,
+    rgba(24, 24, 27, 0.08) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+}
+
+.bg-kaza-hatch-dark {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.16) 0px,
+    rgba(255, 255, 255, 0.16) 2px,
+    #232325 2px,
+    #232325 6px
+  );
+}
+
+.bg-kaza-stripes-vertical {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(24, 24, 27, 0.12) 0px,
+    rgba(24, 24, 27, 0.12) 1.5px,
+    transparent 1.5px,
+    transparent 4.5px
+  );
+}
+
+.bg-kaza-stripes-vertical-dark {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #1F1F23 0px,
+    #1F1F23 1.75px,
+    rgba(255, 255, 255, 0.88) 1.75px,
+    rgba(255, 255, 255, 0.88) 4px
+  );
+}
+
+/* 3D Card Flip utilities */
+.perspective-1000 {
+  perspective: 1100px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* =========================================================
+   60fps GPU-Composited Animation Engine (transform/opacity)
+   ========================================================= */
+
+@keyframes kazaPageEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes kazaBarRise {
+  0% {
+    opacity: 0.35;
+    transform: scaleY(0.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes kazaBarGrowX {
+  0% {
+    opacity: 0.4;
+    transform: scaleX(0.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes kazaSparklineDraw {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0.3;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes kazaOverlayIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes kazaDialogIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -48%, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+}
+
+@keyframes kazaPopoverIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 4px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes kazaToastIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes kazaCardFloatIn {
+  0% {
+    opacity: 0.55;
+    transform: translate3d(0, 8px, 0) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-kaza-page {
+  animation: kazaPageEnter 320ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.animate-kaza-bar-rise {
+  transform-origin: bottom;
+  animation: kazaBarRise 560ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.animate-kaza-bar-grow-x {
+  transform-origin: left;
+  animation: kazaBarGrowX 580ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.animate-kaza-sparkline {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: kazaSparklineDraw 750ms var(--kaza-ease-spring) both;
+}
+
+.animate-kaza-overlay {
+  animation: kazaOverlayIn 200ms ease-out both;
+}
+
+.animate-kaza-dialog {
+  animation: kazaDialogIn 260ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.animate-kaza-popover {
+  animation: kazaPopoverIn 180ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.animate-kaza-toast {
+  animation: kazaToastIn 260ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.animate-kaza-card-in {
+  animation: kazaCardFloatIn 340ms var(--kaza-ease-spring) both;
+  will-change: transform, opacity;
+}
+
+.kaza-tactile {
+  transition:
+    transform 180ms var(--kaza-ease-spring),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    color 150ms ease;
+}
+
+.kaza-tactile:active {
+  transform: scale(0.975);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kaza-page,
+  .animate-kaza-bar-rise,
+  .animate-kaza-bar-grow-x,
+  .animate-kaza-sparkline,
+  .animate-kaza-overlay,
+  .animate-kaza-dialog,
+  .animate-kaza-popover,
+  .animate-kaza-toast,
+  .animate-kaza-card-in {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(24, 24, 27, 0.14);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 24, 27, 0.28);
+}
